@@ -8,31 +8,18 @@
         body {
             text-align: center;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
         }
 
         img {
             max-width: 80%;
             max-height: 80vh;
-            margin: 20px auto;
-            display: block;
-        }
-
-        #navButtons {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #f1f1f1;
-            padding: 10px;
-            box-sizing: border-box;
+            margin: 20px 0;
         }
 
         button {
-            padding: 5px;
-            font-size: 10px;
-            margin: 0 5px;
+            padding: 10px;
+            font-size: 16px;
+            margin: 0 10px;
             cursor: pointer;
         }
     </style>
@@ -40,97 +27,13 @@
 <body>
 
 <!-- Navigation buttons -->
-<div id="navButtons">
-    <button onclick="prevImage()">Prev</button>
-    <button onclick="nextImage()">Next</button>
+<div>
+    <button><a href="home.html">Home</a></button>
+    <!-- You can add additional static pages as needed -->
 </div>
 
 <!-- Image container -->
-<img id="imageViewer" src="" alt="Image Viewer" loading="lazy" >
-
-<script>
-    // Array of image URLs
-    var imageUrls = [
-		//Mehendi Start		
-		"https://drive.google.com/uc?id=1dHIaFry6b_qBbMPpHU2RlJjiRTlYR_9M",
-		"https://drive.google.com/uc?id=1E3dRgRQXNeqBymA0hIjSx0QzYYjpy2AW",
-		"https://drive.google.com/uc?id=1tNUX0WYphEroTNVaWIkYXsQ4e1T8WBPH",
-		"https://drive.google.com/uc?id=1uY938EJKMhqmnAt7yZy4fLeq38YizvkN",
-		"https://drive.google.com/uc?id=16ob1PeKePiKgrhS1AfWfPevjNe3qBJnP",
-		"https://drive.google.com/uc?id=1xCri1agD_GP5eRpHWXfGxVb4dEUzICsT",
-		"https://drive.google.com/uc?id=1RCZM2uOY_fGaIPlvAcQBytS1WHMKAKRP",
-		"https://drive.google.com/uc?id=1LCvx3LgOXW0zMawXZgWmHCsRskcVhPdk",
-		"https://drive.google.com/uc?id=1BF7sabxaWYqCc7yCyCWxAjjdv7MXawOI",
-		"https://drive.google.com/uc?id=1iykZfVUjBL5JzsbBymqHiQ6Gopp117Rr",
-		"https://drive.google.com/uc?id=1JRWqeNhnjknX6WBCwxEtc4zSTuQgHc6X",
-		"https://drive.google.com/uc?id=1BPpc18KpStujkftPp72OoKkkrgx9zo70",
-		"https://drive.google.com/uc?id=1-xcV1q7KAYObONaTFu2ho0tUZR-KPx9s",
-		"https://drive.google.com/uc?id=1lpY0ui1Xzm0I-x0CEI-nAIjksisAgPtI",
-		"https://drive.google.com/uc?id=1_4CmEmudtwurLZnwqgPYT08tUX96jHMo",
-		"https://drive.google.com/uc?id=1ZUnUjev-q-4ffV8xXv5CUDLEQMNvg6EK",
-		"https://drive.google.com/uc?id=1bKrkyqsi7Hyqo6Q7n-tsKPKdEgL037K0",
-		"https://drive.google.com/uc?id=1jJhi_R0vKToqsCWu3BXbo_n2DPJE3rfj",
-		"https://drive.google.com/uc?id=1aiejAPCLUAQpAPcbUQgZNIF3YA5PBvRe",
-		"https://drive.google.com/uc?id=1R13h1blLnvpu9o8nPFd2LKvGGVDt1_Gw",
-		"https://drive.google.com/uc?id=1CVx9VhoGCSmxAfq6_HPE6FnZk3MGSeP1",
-		"https://drive.google.com/uc?id=1cr_v_7dVrAsUTKebgU_R9t8UBvMCIH5D",
-		"https://drive.google.com/uc?id=1wspjb3cfN9Aj77i2XztVsaT1ZzX2yztE",
-		"https://drive.google.com/uc?id=1p9vkakviuxer-_XbrSxxcSBnbpx4OEe9",
-		"https://drive.google.com/uc?id=1TmrGmNNr9PGJPFzNo3PiqDgGmmmoD4m1",
-		"https://drive.google.com/uc?id=1gYHNdsDJGvR1ezK7OdJ5o-rPS144wvTb",
-		"https://drive.google.com/uc?id=1VapiEcJP52NhZHSwUOl49Ae0Lq46pQUv",
-		"https://drive.google.com/uc?id=13qW1hyjmVmT4HmYFg2Y3JTZoWy_tEjaB",
-		"https://drive.google.com/uc?id=11oqUpYl57-DKM0iQjkQ7bZmw7nSLzG-g",
-		"https://drive.google.com/uc?id=1rxKhBmsjqxXXAgC5DR5GZh5vwsFh6KQp",
-		"https://drive.google.com/uc?id=12buffqnvn5b2dbJEXFk30TrtL8umghNm",
-		"https://drive.google.com/uc?id=1Rs-E9ggBD77kn5DSN5b1HjHdyM8TCCaT",
-		"https://drive.google.com/uc?id=1uxmJUhXal9gS0zWeqjRM8ZHtMcZgbw9w",
-		"https://drive.google.com/uc?id=1NPSlo2bxp3OSHtN3so7q0qz8lOxvPXvX",
-		"https://drive.google.com/uc?id=1NVxWeKSk-ITNIBjydlCc0IRMbBDxLb7_",
-		"https://drive.google.com/uc?id=1DajPhYjlstHHcK1o8hHnNq-q3GlpEIlh",
-		"https://drive.google.com/uc?id=18AijOzz3p7pGPQfx2r23UxD1TS6xhgFu",
-		"https://drive.google.com/uc?id=1XiqwZtuV9stxUmUGreS_VOpNvdNFqZum",
-		"https://drive.google.com/uc?id=17oEJ7TbRLhjxIM0mXia3okJW8SVFyYrD",
-		"https://drive.google.com/uc?id=14fHoR8whajPU6jm9yr2kt28JcBLD0znf",
-		"https://drive.google.com/uc?id=1l9Qm4VARovN13oyD_-udStzGMSkhJrm7",
-		"https://drive.google.com/uc?id=1Sr7TnLZGkNoppUq-gIFgch0fstx1A2NW",
-		"https://drive.google.com/uc?id=126pXEVunmmNYlhIhN9tCFdYcp8UOK2g4",
-		"https://drive.google.com/uc?id=1EbWRnFCZKt6j29QI0iIGL0fFLLbt_LIF",
-		"https://drive.google.com/uc?id=1Hrf9rs5xH088qRi5Y2FGRr3aD1bYTydN",
-		"https://drive.google.com/uc?id=1HVv5qwW97G9Vv6n_X7L41byvYr_o9QzR",
-		"https://drive.google.com/uc?id=1jSl708rURijpM6CXUu0vpqZB3d82JDFF",
-		"https://drive.google.com/uc?id=1TbxkiuHOIxA59XLtIWdfX-Jm4hIKv1_Y",
-
-		//Mehendi End
-		//MataPujan Start
-		//MataPujan End
-		
-        // Add more image URLs as needed
-    ];
-
-    var currentIndex = 0;
-
-    function showImage(index) {
-        var imageView = document.getElementById("imageViewer");
-        if (imageView) {
-            imageView.src = imageUrls[index];
-            currentIndex = index;
-        }
-    }
-
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + imageUrls.length) % imageUrls.length;
-        showImage(currentIndex);
-    }
-
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % imageUrls.length;
-        showImage(currentIndex);
-    }
-
-    // Initial image display
-    showImage(currentIndex);
-</script>
+<img src="YOUR_FIRST_IMAGE_URL" alt="Image Viewer">
 
 </body>
 </html>
